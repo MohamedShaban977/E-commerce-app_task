@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-
 import '../../../../app/injection_container.dart';
 import '../../../../core/app_manage/assets_manager.dart';
 import '../../../../core/app_manage/contents_manager.dart';
@@ -22,15 +20,14 @@ class _SplashScreenState extends State<SplashScreen> {
   late Timer _timer;
 
   _startDelay() async {
-    _timer = Timer(const Duration(seconds: Constants.splashDelay), () =>  _goNext()
-        );
+    _timer =
+        Timer(const Duration(seconds: Constants.splashDelay), () => _goNext());
   }
 
-  _goNext() => MagicRouterName.navigateReplacementTo(
-      sl<CacheHelper>().getToken() == null ? RoutesNames.loginRoute : RoutesNames.mainLayoutApp
-  );
-
-
+  _goNext() =>
+      MagicRouterName.navigateReplacementTo(sl<CacheHelper>().getToken() == null
+          ? RoutesNames.loginRoute
+          : RoutesNames.mainLayoutApp);
 
   @override
   void initState() {
@@ -48,14 +45,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: _buildLottieAsset(),
+        child: _buildLottieAsset(),
       ),
     );
   }
 
-  _buildLottieAsset() =>  Lottie.asset(
-      JsonAssets.splash,
-      animate: true,
-
-  );
+  _buildLottieAsset() => Lottie.asset(
+        JsonAssets.splash,
+        animate: true,
+      );
 }
