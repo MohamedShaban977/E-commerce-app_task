@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_task/core/routes/routes_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,7 +60,7 @@ class ViewCardProductWidget extends StatelessWidget {
 
   void goToProductDetailsScreen() => MagicRouterName.navigateTo(
         RoutesNames.productDetails,
-        arguments: {"id": _product.id},
+        arguments: RouteRequest(id: '${_product.id}').toJson(),
       );
 
   details.ProductDetailsEntity _buildProductDetailsEntity() =>

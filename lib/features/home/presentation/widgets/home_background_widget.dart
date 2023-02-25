@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
+import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +42,7 @@ class HomeBackground extends StatelessWidget {
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: [0.0, 0.0, 0.85, 1.0],
+                      stops: [AppSize.s0, AppSize.s0, 0.85, 1.0],
                     ),
                   ),
                 );
@@ -49,8 +50,8 @@ class HomeBackground extends StatelessWidget {
             ),
             BackdropFilter(
               filter: ImageFilter.blur(
-                sigmaX: 20.0,
-                sigmaY: 20.0,
+                sigmaX: AppSize.s20,
+                sigmaY: AppSize.s20,
               ),
               child: Container(
                 decoration: BoxDecoration(color: Colors.white.withOpacity(0.2)),

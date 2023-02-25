@@ -10,7 +10,7 @@ class TopScreenSearchAndSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p14),
       child: Column(
         children: const [
           CustomTextFieldSearch(),

@@ -39,7 +39,7 @@ class CategoriesRewView extends StatelessWidget {
       child: Row(
         children: List.generate(
           _cubit.get(context).categoriesList.length,
-              (index) => CardCategoriesInHomeWidget(
+          (index) => CardCategoriesInHomeWidget(
             categoriesEntity: _cubit.get(context).categoriesList[index],
           ),
         ),

@@ -2,6 +2,9 @@ import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/app_manage/values_manager.dart';
+import '../../../../core/routes/magic_router.dart';
+import '../../../../core/routes/routes_name.dart';
+import '../../../../core/routes/routes_request.dart';
 import '../../../categories/domain/entities/categories_entity.dart';
 
 class CardCategoriesInHomeWidget extends StatelessWidget {
@@ -15,11 +18,10 @@ class CardCategoriesInHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  const EdgeInsets.symmetric(horizontal: AppPadding.p4),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p4),
       child: GestureDetector(
-          onTap: (){
-            /// TODO : GO TO Product By Categories
-          },
+        onTap: () => MagicRouterName.navigateTo(RoutesNames.products,
+            arguments: RouteRequest(id: '${_categoriesEntity.id}').toJson()),
         child: Column(
           children: [
             Card(

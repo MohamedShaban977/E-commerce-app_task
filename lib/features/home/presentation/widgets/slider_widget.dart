@@ -52,7 +52,7 @@ class SliderWidget extends StatelessWidget {
                 dotWidth: AppSize.s8,
               ),
               textDirection:
-              context.isEnLocale ? TextDirection.ltr : TextDirection.rtl,
+                  context.isEnLocale ? TextDirection.ltr : TextDirection.rtl,
             ),
           ],
         );

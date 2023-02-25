@@ -1,4 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
+import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class MostRecentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
       child: Column(
         children: [
           Row(

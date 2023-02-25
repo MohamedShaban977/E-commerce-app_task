@@ -8,6 +8,7 @@ import '../../../../app/injection_container.dart';
 import '../../../../core/app_manage/color_manager.dart';
 import '../../../../core/app_manage/strings_manager.dart';
 import '../../../../core/app_manage/values_manager.dart';
+import '../../../../widgets/custom_image_network_view.dart';
 import '../../../products/domain/entities/products_entity.dart';
 
 class ContentCardProduct extends StatelessWidget {
@@ -23,8 +24,8 @@ class ContentCardProduct extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.network(
-          _product.imageLink,
+        CustomViewImageNetwork(
+          image: _product.imageLink,
           height: 110.0,
           width: context.width,
           fit: BoxFit.cover,
@@ -54,7 +55,6 @@ class ContentCardProduct extends StatelessWidget {
                       style: context.titleLarge
                           .copyWith(color: ColorManager.primary),
                     ),
-
                     BlocBuilder<CartsCubit, CartsState>(
                       builder: (context, state) {
                         return Icon(
