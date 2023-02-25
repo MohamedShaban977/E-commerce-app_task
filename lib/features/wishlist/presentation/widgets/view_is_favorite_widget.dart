@@ -13,7 +13,7 @@ class IsFavoriteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: () async =>
-      await sl<WishlistCubit>().get(context).toggleIsFavorite(product),
+          await sl<WishlistCubit>().get(context).toggleIsFavorite(product),
       shape: const CircleBorder(),
       highlightColor: ColorManager.secondary.withOpacity(0.3),
       splashColor: ColorManager.secondary.withOpacity(0.3),

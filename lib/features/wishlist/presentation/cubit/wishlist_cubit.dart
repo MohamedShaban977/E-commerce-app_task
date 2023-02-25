@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/cache/hive_helper.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/useCases/use_case.dart';
-import '../../../product_details/data/models/product_details_response.dart';
 import '../../../product_details/domain/entities/product_details_entity.dart';
 import '../../domain/use_cases/check_if_product_favorite_use_case.dart';
 import '../../domain/use_cases/delete_product_by_id_use_case.dart';
@@ -51,41 +50,35 @@ class WishlistCubit extends Cubit<WishlistState> {
     emit(SaveProductByIdLoadingState());
     Either<Failure, void> response = await saveProduct.call(product);
     response.fold(
-      (failure) => emit(SaveProductByIdErrorState(HandleFailure.mapFailureToMsg(failure))),
+      (failure) => emit(
+          SaveProductByIdErrorState(HandleFailure.mapFailureToMsg(failure))),
       (response) => emit(SaveProductByIdSuccessState()),
     );
   }
-  //
-  // Future<void> getProductByIdFavorite(int idProduct) async {
-  //   emit(GetProductByIdLoadingState());
-  //   Either<Failure, ProductDetailsEntity> response = await getProductById.call(idProduct);
-  //   response.fold(
-  //     (failure) => emit(GetProductByIdErrorState(HandleFailure.mapFailureToMsg(failure))),
-  //     (response) => emit(GetProductByIdSuccessState(response)),
-  //   );
-  // }
 
   Future<void> deleteProductByIdFavorite(int idProduct) async {
     emit(DeleteProductByIdLoadingState());
     Either<Failure, void> response = await deleteProductById.call(idProduct);
     response.fold(
-      (failure) => emit(DeleteProductByIdErrorState(HandleFailure.mapFailureToMsg(failure))),
+      (failure) => emit(
+          DeleteProductByIdErrorState(HandleFailure.mapFailureToMsg(failure))),
       (response) {
-        productsFavorite.removeWhere((element) => element.id ==idProduct);
+        productsFavorite.removeWhere((element) => element.id == idProduct);
         emit(DeleteProductByIdSuccessState());
       },
     );
   }
+
   Future<void> toggleIsFavorite(ProductDetailsEntity product) async {
     if (HiveHelper.favoritesProductDB.containsKey(product.id)) {
       await deleteProductByIdFavorite(product.id);
-    }
-    else {
+    } else {
       await saveProductFavorite(product);
     }
-
   }
 
-  IconData isFavoriteIcon (int id)=>HiveHelper.favoritesProductDB.containsKey(id) ? Icons.favorite : Icons.favorite_border;
-
+  IconData isFavoriteIcon(int id) =>
+      HiveHelper.favoritesProductDB.containsKey(id)
+          ? Icons.favorite
+          : Icons.favorite_border;
 }

@@ -4,7 +4,6 @@ import '../../../product_details/domain/entities/product_details_entity.dart';
 
 part 'product_favorite_table.g.dart';
 
-
 @HiveType(typeId: 0)
 class ProductFavoriteTable extends ProductDetailsEntity {
   @HiveField(0)
@@ -28,7 +27,7 @@ class ProductFavoriteTable extends ProductDetailsEntity {
   @HiveField(6)
   final CategoryTable? category;
 
-   ProductFavoriteTable({
+  ProductFavoriteTable({
     required this.id,
     required this.name,
     required this.imageLink,

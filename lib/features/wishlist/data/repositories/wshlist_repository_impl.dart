@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app_task/core/error/exceptions.dart';
 import 'package:e_commerce_app_task/core/error/failures.dart';
-import 'package:e_commerce_app_task/features/product_details/domain/entities/product_details_entity.dart';
-import 'package:e_commerce_app_task/features/wishlist/data/data_sources/wishlist_local_data_sources.dart';
 
+import '../../../product_details/domain/entities/product_details_entity.dart';
 import '../../domain/repositories/wishlist_repository.dart';
+import '../data_sources/wishlist_local_data_sources.dart';
 import '../tables/product_favorite_table.dart';
 
 class WishlistRepositoryImpl extends WishlistRepository {
@@ -13,12 +13,11 @@ class WishlistRepositoryImpl extends WishlistRepository {
   WishlistRepositoryImpl({required this.dataSource});
 
   @override
-  Future<Either<Failure, void>> saveProductById(ProductDetailsEntity product) async {
+  Future<Either<Failure, void>> saveProductById(
+      ProductDetailsEntity product) async {
     try {
-      final table = ProductFavoriteTable.fromEntity(product);
-      print(table);
-      final response =
-          await dataSource.saveProductById(ProductFavoriteTable.fromEntity(product));
+      final response = await dataSource
+          .saveProductById(ProductFavoriteTable.fromEntity(product));
       return Right(response);
     } on Exception catch (error) {
       return Left(CacheFailure(error.toString()));

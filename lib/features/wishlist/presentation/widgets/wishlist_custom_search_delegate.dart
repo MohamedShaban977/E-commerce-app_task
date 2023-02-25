@@ -1,9 +1,7 @@
-
 import 'package:e_commerce_app_task/features/product_details/domain/entities/product_details_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/custom_empty_widget.dart';
-import '../../../categories/presentation/widgets/search_body_widget.dart';
 import '../cubit/wishlist_cubit.dart';
 import 'wishlist_search_body_widget.dart';
 
@@ -61,9 +59,9 @@ class WishlistCustomSearchDelegate extends SearchDelegate {
     final List<ProductDetailsEntity> allResult = cubit.productsFavorite
         .where(
           (element) => element.name.toLowerCase().contains(
-        query.toLowerCase(),
-      ),
-    )
+                query.toLowerCase(),
+              ),
+        )
         .toList();
     return allResult;
   }

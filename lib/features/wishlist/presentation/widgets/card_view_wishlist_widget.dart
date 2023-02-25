@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../product_details/domain/entities/product_details_entity.dart';
@@ -12,7 +13,7 @@ class CardViewWishlistWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 17.0),
+      padding: const EdgeInsets.only(top: AppPadding.p16),
       child: Card(
         clipBehavior: Clip.antiAlias,
         child: Stack(

@@ -10,7 +10,6 @@ class GridViewInWishlistView extends StatelessWidget {
 
   final List<ProductDetailsEntity> products;
 
-
   @override
   Widget build(BuildContext context) {
     return GridView.count(
