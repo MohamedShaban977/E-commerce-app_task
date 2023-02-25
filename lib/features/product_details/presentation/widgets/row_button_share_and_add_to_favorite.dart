@@ -20,11 +20,12 @@ class RowButtonsShareAndAddToFavorite extends StatefulWidget {
   final ProductDetailsEntity _product;
 
   @override
-  State<RowButtonsShareAndAddToFavorite> createState() => _RowButtonsShareAndAddToFavoriteState();
+  State<RowButtonsShareAndAddToFavorite> createState() =>
+      _RowButtonsShareAndAddToFavoriteState();
 }
 
-class _RowButtonsShareAndAddToFavoriteState extends State<RowButtonsShareAndAddToFavorite> {
-
+class _RowButtonsShareAndAddToFavoriteState
+    extends State<RowButtonsShareAndAddToFavorite> {
   final WishlistCubit _wishlistCubit = sl<WishlistCubit>();
 
   @override
@@ -38,7 +39,6 @@ class _RowButtonsShareAndAddToFavoriteState extends State<RowButtonsShareAndAddT
           children: [
             BlocConsumer<WishlistCubit, WishlistState>(
               listener: (context, state) {
-                // TODO: implement listener
                 if (state is SaveProductByIdSuccessState) {
                   ToastAndSnackBar.toastSuccess(message: 'تم الحفظ بنجاح');
                 }
@@ -50,13 +50,15 @@ class _RowButtonsShareAndAddToFavoriteState extends State<RowButtonsShareAndAddT
               builder: (context, state) {
                 return CustomButtonWidget(
                   onPressed: () async {
-                    /// Todo: addedToFavourites
                     await _wishlistCubit
                         .get(context)
                         .toggleIsFavorite(widget._product);
                   },
                   text: AppStrings.addedToFavourites.tr(),
-                  icon: HiveHelper.favoritesProductDB.containsKey(widget._product.id) ? Icons.favorite : Icons.favorite_border,
+                  icon: HiveHelper.favoritesProductDB
+                          .containsKey(widget._product.id)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
                   colorText: ColorManager.secondary,
                   colorIcon: ColorManager.secondary,
                   style: context.bodyMedium,
@@ -71,9 +73,6 @@ class _RowButtonsShareAndAddToFavoriteState extends State<RowButtonsShareAndAddT
             CustomButtonWidget(
               onPressed: () async {
                 ///TODO: share product
-                await sl<WishlistCubit>()
-                    .get(context)
-                    .getAllProductsFavorite();
               },
               text: AppStrings.productSharing.tr(),
               icon: Icons.share,

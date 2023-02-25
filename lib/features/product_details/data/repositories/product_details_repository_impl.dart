@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app_task/core/api/service_response.dart';
 import 'package:e_commerce_app_task/core/error/failures.dart';
@@ -13,13 +12,13 @@ class ProductDetailsRepositoryImpl implements ProductDetailsRepository {
 
   ProductDetailsRepositoryImpl({required this.dataSource});
 
-
   @override
-  Future<Either<Failure, CollectionResponseEntity<ProductDetailsEntity>>> getProductDetails(String id) async {
+  Future<Either<Failure, CollectionResponseEntity<ProductDetailsEntity>>>
+      getProductDetails(String id) async {
     try {
       final res = await dataSource.getProductDetails(id);
 
-      return  Right(res) ;
+      return Right(res);
     } on ServerException catch (error) {
       return left(ServerFailure(error.message));
     }

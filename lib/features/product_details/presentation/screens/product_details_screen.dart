@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/injection_container.dart';
+import '../../../../widgets/custom_image_network_view.dart';
 import '../../../../widgets/custom_loading_widget.dart';
 import '../cubit/product_details_cubit.dart';
 import '../widgets/button_add_to_cart_widget.dart';
@@ -77,11 +78,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Column buildTopScreen() {
     return Column(
       children: [
-        Image.network(
-          _cubit.get(context).product.imageLink,
+
+        CustomViewImageNetwork(
+          image: _cubit.get(context).product.imageLink,
           height: 340.0,
           width: context.width,
-          fit: BoxFit.cover,
         ),
         RowButtonsShareAndAddToFavorite(product: _cubit.get(context).product),
       ],
