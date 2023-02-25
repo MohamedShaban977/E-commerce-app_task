@@ -29,11 +29,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: _buildAppBar(),
-        body: BlocConsumer<ProductsCubit, ProductsState>(
-          listener: (context, state) {},
+        body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
             return RefreshIndicator(
-              onRefresh: () async => await Future.sync(() => null),
+              onRefresh: () async => await Future.sync(
+                  () => cubit.getProductsByCategory(idCategory: widget.id)),
               child: SizedBox(
                 height: context.heightBody,
                 child: IntrinsicHeight(

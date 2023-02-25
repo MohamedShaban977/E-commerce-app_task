@@ -2,6 +2,7 @@ part of 'products_cubit.dart';
 
 abstract class ProductsState extends Equatable {
   const ProductsState();
+
   @override
   List<Object> get props => [];
 }
@@ -28,7 +29,6 @@ class GetProductsErrorState extends ProductsState {
   List<Object> get props => [error];
 }
 
-
 class GetProductsByCategoryLoadingState extends ProductsState {}
 
 class GetProductsByCategorySuccessState extends ProductsState {
@@ -49,8 +49,6 @@ class GetProductsByCategoryErrorState extends ProductsState {
   List<Object> get props => [error];
 }
 
-
-
 class GetProductsMostRecentLoadingState extends ProductsState {}
 
 class GetProductsMostRecentSuccessState extends ProductsState {
@@ -70,9 +68,6 @@ class GetProductsMostRecentErrorState extends ProductsState {
   @override
   List<Object> get props => [error];
 }
-
-
-
 
 class GetProductsMostPopularLoadingState extends ProductsState {}
 

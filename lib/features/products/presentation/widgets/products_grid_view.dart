@@ -16,15 +16,14 @@ class ProductsGridView extends StatelessWidget {
       crossAxisCount: Responsive.isMobile(context)
           ? 2
           : Responsive.isTablet(context)
-          ? 3
-          : 4,
+              ? 3
+              : 4,
       childAspectRatio: 0.8,
       children: List.generate(
           products.length,
-              (index) => ViewCardProductWidget(
-            product: products[index],
-          )),
+          (index) => ViewCardProductWidget(
+                product: products[index],
+              )),
     );
   }
 }
-

@@ -5,9 +5,15 @@ import '../../../../core/api/service_response.dart';
 import '../../../../core/error/failures.dart';
 
 abstract class ProductsRepository {
-  Future<Either<Failure, CollectionResponseEntity<ProductsEntity>>> getAllProducts();
-  Future<Either<Failure,CollectionResponse<ProductsEntity>>> getProductsByCategory(String idCategory);
-  Future<Either<Failure,CollectionResponse<ProductsEntity>>> getMostPopularProducts();
-  Future<Either<Failure,CollectionResponse<ProductsEntity>>> getMostRecentProducts();
+  Future<Either<Failure, CollectionResponseEntity<ProductsEntity>>>
+      getAllProducts();
 
+  Future<Either<Failure, CollectionResponse<ProductsEntity>>>
+      getProductsByCategory(String idCategory);
+
+  Future<Either<Failure, CollectionResponse<ProductsEntity>>>
+      getMostPopularProducts();
+
+  Future<Either<Failure, CollectionResponse<ProductsEntity>>>
+      getMostRecentProducts();
 }

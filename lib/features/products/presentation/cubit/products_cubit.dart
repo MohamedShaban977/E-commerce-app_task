@@ -26,6 +26,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit get(context) => BlocProvider.of(context);
 
   List<ProductsEntity> allProducts = [];
+
   Future<void> getAllProducts() async {
     emit(GetProductsLoadingState());
     Either<Failure, CollectionResponseEntity<ProductsEntity>> response =
@@ -39,20 +40,22 @@ class ProductsCubit extends Cubit<ProductsState> {
     });
   }
 
-
   List<ProductsEntity> allProductsByCategory = [];
+
   Future<void> getProductsByCategory({required String idCategory}) async {
     emit(GetProductsByCategoryLoadingState());
-    Either<Failure, CollectionResponseEntity<ProductsEntity>> response = await productsByCategoryUseCase.call(idCategory);
+    Either<Failure, CollectionResponseEntity<ProductsEntity>> response =
+        await productsByCategoryUseCase.call(idCategory);
     response.fold(
-        (failure) => emit(GetProductsByCategoryErrorState(HandleFailure.mapFailureToMsg(failure))), (response) {
+        (failure) => emit(GetProductsByCategoryErrorState(
+            HandleFailure.mapFailureToMsg(failure))), (response) {
       allProductsByCategory = response.results;
       emit(GetProductsByCategorySuccessState(response));
     });
   }
 
-
   List<ProductsEntity> productsMostRecent = [];
+
   Future<void> getProductsMostRecent() async {
     emit(GetProductsMostRecentLoadingState());
     Either<Failure, CollectionResponseEntity<ProductsEntity>> response =
@@ -66,6 +69,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   List<ProductsEntity> productsMostPopular = [];
+
   Future<void> getProductsMostPopular() async {
     emit(GetProductsMostPopularLoadingState());
     Either<Failure, CollectionResponseEntity<ProductsEntity>> response =

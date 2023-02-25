@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_task/core/routes/routes_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,7 +6,8 @@ import '../../../../core/app_manage/color_manager.dart';
 import '../../../../core/routes/magic_router.dart';
 import '../../../../core/routes/routes_name.dart';
 import '../../../home/presentation/widgets/content_card_product.dart';
-import '../../../product_details/domain/entities/product_details_entity.dart'as details;
+import '../../../product_details/domain/entities/product_details_entity.dart'
+    as details;
 import '../../../wishlist/presentation/cubit/wishlist_cubit.dart';
 import '../../../wishlist/presentation/widgets/view_is_favorite_widget.dart';
 import '../../domain/entities/products_entity.dart';
@@ -52,9 +54,9 @@ class ViewCardProductWidget extends StatelessWidget {
   }
 
   void goToProductDetailsScreen() => MagicRouterName.navigateTo(
-    RoutesNames.productDetails,
-    arguments: {"id": _product.id},
-  );
+        RoutesNames.productDetails,
+        arguments: RouteRequest(id: '${_product.id}').toJson(),
+      );
 
   details.ProductDetailsEntity _buildProductDetailsEntity() =>
       details.ProductDetailsEntity(
