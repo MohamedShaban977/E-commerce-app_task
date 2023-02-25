@@ -1,4 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
+import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../cubit/product_details_cubit.dart';
@@ -22,6 +23,7 @@ class ViewCountQuantityAndIncrementAndDecrementQuantity
           ButtonCountQuantity(
             onPressed: () => _cubit.incrementQuantity(),
             icon: Icons.add,
+            isRight: !context.isEnLocale,
           ),
           Expanded(
             child: SizedBox(
@@ -41,7 +43,7 @@ class ViewCountQuantityAndIncrementAndDecrementQuantity
           ButtonCountQuantity(
             onPressed: () => _cubit.decrementQuantity(),
             icon: Icons.remove,
-            isRight: false,
+            isRight: context.isEnLocale,
             isDisable: _cubit.countQuantity <= 1,
           ),
         ],

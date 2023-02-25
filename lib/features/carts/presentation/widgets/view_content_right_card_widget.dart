@@ -20,10 +20,12 @@ class ViewContentRightCard extends StatelessWidget {
       width: 120.0,
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomViewImageNetwork(
             image: product.imageLink,
             height: 110,
+            fit: BoxFit.cover,
           ),
           Expanded(
             child: Row(
