@@ -1,7 +1,7 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
-import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/app_manage/values_manager.dart';
 import '../../../product_details/domain/entities/product_details_entity.dart';
 import 'view_content_left_card.dart';
 import 'view_content_right_card_widget.dart';

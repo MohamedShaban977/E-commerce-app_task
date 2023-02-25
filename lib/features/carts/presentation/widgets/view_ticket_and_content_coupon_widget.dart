@@ -1,4 +1,3 @@
-
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +22,10 @@ class ViewTicketAndContentCouponWidget extends StatelessWidget {
           height: 150.0,
         ),
         Positioned(
-          top: 0.0,
-          bottom: 0.0,
+          top: AppSize.s0,
+          bottom: AppSize.s0,
           width: context.width * 0.7,
-          right: 0.0,
+          right: AppSize.s0,
           child: Align(
             alignment: Alignment.centerRight,
             child: Padding(

@@ -1,6 +1,6 @@
-import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/app_manage/values_manager.dart';
 import '../cubit/carts_cubit.dart';
 import 'cardViewTotalPriceAllProductAndTaxesInWidget.dart';
 import 'checkout_button_widget.dart';
@@ -22,14 +22,24 @@ class ViewContentCartScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: AppSize.s16),
-         ViewTotalItemAndPrice(cubit: cubit),
+
+        ///
+        ViewTotalItemAndPrice(cubit: cubit),
         const SizedBox(height: AppSize.s16),
+
+        ///
         ViewListProductInCart(productsCart: cubit.productsCart),
         const SizedBox(height: AppSize.s25),
+
+        ///
         const ViewTicketAndContentCouponWidget(),
         const SizedBox(height: AppSize.s25),
-         CardViewTotalPriceAllProductAndTaxesInWidget(cubit: cubit),
+
+        ///
+        CardViewTotalPriceAllProductAndTaxesInWidget(cubit: cubit),
         const SizedBox(height: AppSize.s16),
+
+        ///
         const CheckoutButtonWidget(),
         const SizedBox(height: AppSize.s40),
       ],

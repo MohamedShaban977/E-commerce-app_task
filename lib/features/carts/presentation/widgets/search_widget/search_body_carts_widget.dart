@@ -15,7 +15,7 @@ class SearchBodyCartsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
       child: ViewListProductInCart(productsCart: allResult),
     );
   }

@@ -11,6 +11,4 @@ abstract class CartRepository {
   Future<Either<Failure, void>> saveProductById(ProductDetailsEntity product);
 
   Future<Either<Failure, void>> deleteProductById(int id);
-
-  Future<Either<Failure, bool>> checkIfProductFavorite(int id);
 }

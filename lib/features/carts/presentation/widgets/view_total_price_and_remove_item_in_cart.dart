@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/injection_container.dart';
 import '../../../../core/app_manage/color_manager.dart';
+import '../../../../core/app_manage/values_manager.dart';
 import '../../../product_details/domain/entities/product_details_entity.dart';
 import '../../../product_details/presentation/widgets/view_price_widget.dart';
 import '../cubit/carts_cubit.dart';
@@ -26,7 +27,7 @@ class ViewTotalPriceAndRemoveItemInCart extends StatelessWidget {
           Expanded(
             child: SizedBox(
               child: Card(
-                elevation: 0.0,
+                elevation: AppSize.s0,
                 margin: EdgeInsets.zero,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero),

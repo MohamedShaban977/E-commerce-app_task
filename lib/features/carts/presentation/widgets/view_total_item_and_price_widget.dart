@@ -1,4 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
+import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ViewTotalItemAndPrice extends StatelessWidget {
       child: Card(
         elevation: 0.8,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(AppPadding.p12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -32,7 +33,7 @@ class ViewTotalItemAndPrice extends StatelessWidget {
                   Text(cubit.totalQuantity().toString(),
                       style: context.bodyMedium
                           .copyWith(color: ColorManager.primary)),
-                  const SizedBox(width: 5.0),
+                  const SizedBox(width: AppSize.s4),
                   Text(
                     AppStrings.item.tr(),
                     style: context.titleLarge,

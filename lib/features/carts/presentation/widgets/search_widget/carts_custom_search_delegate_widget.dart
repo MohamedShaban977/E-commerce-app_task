@@ -59,9 +59,9 @@ class CartsCustomSearchDelegate extends SearchDelegate {
     final List<ProductDetailsEntity> allResult = cubit.productsCart
         .where(
           (element) => element.name.toLowerCase().contains(
-        query.toLowerCase(),
-      ),
-    )
+                query.toLowerCase(),
+              ),
+        )
         .toList();
     return allResult;
   }

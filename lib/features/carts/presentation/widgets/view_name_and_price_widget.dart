@@ -23,7 +23,7 @@ class ViewNameAndPriceWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(AppPadding.p8),
             child: Text(
               product.name,
               style: context.titleLarge,
@@ -34,13 +34,13 @@ class ViewNameAndPriceWidget extends StatelessWidget {
             child: PriceWidget(
               price: product.price,
               stylePrice:
-              context.titleLarge.copyWith(color: ColorManager.primary),
+                  context.titleLarge.copyWith(color: ColorManager.primary),
               style: context.bodySmall.copyWith(color: ColorManager.primary),
             ),
           ),
           const Divider(
-            thickness: 1.5,
-            height: 1.0,
+            thickness: AppSize.s1_5,
+            height: AppSize.s1,
           )
         ],
       ),

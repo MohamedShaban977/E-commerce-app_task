@@ -2,7 +2,6 @@ import 'package:hive/hive.dart';
 
 import '../tables/product_cart_table.dart';
 
-
 abstract class CartLocalDataSource {
   Future<List<ProductCartTable>> getAllProducts();
 
@@ -11,8 +10,6 @@ abstract class CartLocalDataSource {
   Future<void> saveProductById(ProductCartTable product);
 
   Future<void> deleteProductById(int id);
-
-  Future<bool> checkIfProductFavorite(int id);
 }
 
 class CartLocalDataSourceImpl implements CartLocalDataSource {
@@ -23,7 +20,7 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
   @override
   Future<void> saveProductById(ProductCartTable product) async {
     final productBox = await _openBox();
-    if(productBox.containsKey(product.id)) {
+    if (productBox.containsKey(product.id)) {
       await productBox.delete(product.id);
       await productBox.put(product.id, product);
     }
@@ -45,7 +42,7 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
   Future<ProductCartTable> getProductById(int id) async {
     final productBox = await _openBox();
 
-    late  ProductCartTable productTable ;
+    late ProductCartTable productTable;
     if (productBox.containsKey(id)) {
       final product = await productBox.get(id);
       productTable = ProductCartTable.fromEntity(product);
@@ -58,11 +55,4 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
     final productBox = await _openBox();
     await productBox.delete(id);
   }
-
-  @override
-  Future<bool> checkIfProductFavorite(int id) async {
-    final productBox = await _openBox();
-    return productBox.containsKey(id);
-  }
 }
-

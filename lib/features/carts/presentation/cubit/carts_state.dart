@@ -2,6 +2,7 @@ part of 'carts_cubit.dart';
 
 abstract class CartsState extends Equatable {
   const CartsState();
+
   @override
   List<Object> get props => [];
 }
@@ -10,7 +11,9 @@ class CartsInitial extends CartsState {}
 
 ///
 class SaveProductByIdLoadingState extends CartsState {}
+
 class SaveProductByIdSuccessState extends CartsState {}
+
 class SaveProductByIdErrorState extends CartsState {
   final String error;
 
@@ -22,6 +25,7 @@ class SaveProductByIdErrorState extends CartsState {
 
 ///
 class GetAllProductsCartLoadingState extends CartsState {}
+
 class GetAllProductsCartSuccessState extends CartsState {
   final List<ProductDetailsEntity> response;
 
@@ -30,6 +34,7 @@ class GetAllProductsCartSuccessState extends CartsState {
   @override
   List<Object> get props => [response];
 }
+
 class GetAllProductsCartErrorState extends CartsState {
   final String error;
 
@@ -41,6 +46,7 @@ class GetAllProductsCartErrorState extends CartsState {
 
 ///
 class GetProductByIdLoadingState extends CartsState {}
+
 class GetProductByIdSuccessState extends CartsState {
   final ProductDetailsEntity response;
 
@@ -49,6 +55,7 @@ class GetProductByIdSuccessState extends CartsState {
   @override
   List<Object> get props => [response];
 }
+
 class GetProductByIdErrorState extends CartsState {
   final String error;
 
@@ -60,7 +67,9 @@ class GetProductByIdErrorState extends CartsState {
 
 ///
 class DeleteProductByIdLoadingState extends CartsState {}
+
 class DeleteProductByIdSuccessState extends CartsState {}
+
 class DeleteProductByIdErrorState extends CartsState {
   final String error;
 
@@ -72,6 +81,7 @@ class DeleteProductByIdErrorState extends CartsState {
 
 ///
 class CheckIfProductFavoriteLoadingState extends CartsState {}
+
 class CheckIfProductFavoriteSuccessState extends CartsState {
   final bool checkIfProductFavorite;
 
@@ -80,6 +90,7 @@ class CheckIfProductFavoriteSuccessState extends CartsState {
   @override
   List<Object> get props => [checkIfProductFavorite];
 }
+
 class CheckIfProductFavoriteErrorState extends CartsState {
   final String error;
 
@@ -90,5 +101,7 @@ class CheckIfProductFavoriteErrorState extends CartsState {
 }
 
 class CountInitial extends CartsState {}
+
 class DecrementQuantityState extends CartsState {}
+
 class IncrementQuantityState extends CartsState {}

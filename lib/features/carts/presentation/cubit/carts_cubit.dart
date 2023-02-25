@@ -1,7 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce_app_task/features/carts/data/tables/product_cart_table.dart';
-import 'package:e_commerce_app_task/features/carts/domain/use_cases/geta_all_products_use_case.dart';
-import 'package:e_commerce_app_task/features/carts/domain/use_cases/save_product_by_id_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +8,11 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/useCases/use_case.dart';
 import '../../../product_details/domain/entities/product_details_entity.dart';
 import '../../../wishlist/data/tables/product_favorite_table.dart';
+import '../../data/tables/product_cart_table.dart';
 import '../../domain/use_cases/delete_product_by_id_use_case.dart';
 import '../../domain/use_cases/get_product_by_id_use_case.dart';
+import '../../domain/use_cases/geta_all_products_use_case.dart';
+import '../../domain/use_cases/save_product_by_id_use_case.dart';
 
 part 'carts_state.dart';
 
@@ -81,57 +81,30 @@ class CartsCubit extends Cubit<CartsState> {
     );
   }
 
-  int getCountQuantity(int index) => productsCart[index].quantity!;
-
   int countQuantity = 0;
 
   Future<void> decrementQuantity(ProductDetailsEntity product) async {
     emit(CountInitial());
-      countQuantity = product.quantity!;
+    countQuantity = product.quantity!;
 
     if (countQuantity <= 1) return;
     countQuantity--;
-    HiveHelper.cartProductDB.put(product.id, ProductCartTable(
-            id: product.id,
-            name: product.name,
-            imageLink: product.imageLink,
-            price: product.price,
-            description: product.description,
-            rate: product.rate,
-            category: CategoryTable(
-              id: product.category!.id,
-              name: product.category!.name,
-              imageLink: product.category!.imageLink,
-            ),
-            quantity: countQuantity));
+    _updateCartProductDB(product);
     getAllProductsInCart();
     emit(IncrementQuantityState());
   }
 
   Future<void> incrementQuantity(ProductDetailsEntity product) async {
     emit(CountInitial());
-      countQuantity = product.quantity!;
+    countQuantity = product.quantity!;
 
     countQuantity++;
-    HiveHelper.cartProductDB.put(product.id, ProductCartTable(
-        id: product.id,
-        name: product.name,
-        imageLink: product.imageLink,
-        price: product.price,
-        description: product.description,
-        rate: product.rate,
-        category: CategoryTable(
-          id: product.category!.id,
-          name: product.category!.name,
-          imageLink: product.category!.imageLink,
-        ),
-        quantity: countQuantity));
+    _updateCartProductDB(product);
     getAllProductsInCart();
     print(product.quantity);
 
     emit(IncrementQuantityState());
   }
-
 
   bool isCart(int id) => HiveHelper.cartProductDB.containsKey(id);
 
@@ -170,4 +143,22 @@ class CartsCubit extends Cubit<CartsState> {
   IconData isCartIcon(int id) => HiveHelper.cartProductDB.containsKey(id)
       ? Icons.shopping_cart
       : Icons.add_shopping_cart;
+
+  void _updateCartProductDB(ProductDetailsEntity product) {
+    HiveHelper.cartProductDB.put(
+        product.id,
+        ProductCartTable(
+            id: product.id,
+            name: product.name,
+            imageLink: product.imageLink,
+            price: product.price,
+            description: product.description,
+            rate: product.rate,
+            category: CategoryTable(
+              id: product.category!.id,
+              name: product.category!.name,
+              imageLink: product.category!.imageLink,
+            ),
+            quantity: countQuantity));
+  }
 }

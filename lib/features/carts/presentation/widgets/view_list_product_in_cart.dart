@@ -12,7 +12,7 @@ class ViewListProductInCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(productsCart.length,
-              (index) => ViewCardInCartItemWidget(product: productsCart[index])),
+          (index) => ViewCardInCartItemWidget(product: productsCart[index])),
     );
   }
 }

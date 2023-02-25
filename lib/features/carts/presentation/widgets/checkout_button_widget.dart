@@ -1,4 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
+import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -30,7 +31,7 @@ class CheckoutButtonWidget extends StatelessWidget {
       title: '',
       text: AppStrings.thankYouForOrder.tr(),
       confirmBtnColor: ColorManager.secondary,
-      borderRadius: 8.0,
+      borderRadius: AppSize.s8,
       confirmBtnText: AppStrings.finished.tr(),
     );
   }

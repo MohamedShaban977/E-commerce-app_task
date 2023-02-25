@@ -6,7 +6,6 @@ import '../../../wishlist/data/tables/product_favorite_table.dart';
 
 part 'product_cart_table.g.dart';
 
-
 @HiveType(typeId: 2)
 class ProductCartTable extends ProductDetailsEntity {
   @HiveField(0)
@@ -33,7 +32,7 @@ class ProductCartTable extends ProductDetailsEntity {
   @HiveField(7)
   final int quantity;
 
-   ProductCartTable({
+  ProductCartTable({
     required this.id,
     required this.name,
     required this.imageLink,
@@ -69,4 +68,3 @@ class ProductCartTable extends ProductDetailsEntity {
     );
   }
 }
-

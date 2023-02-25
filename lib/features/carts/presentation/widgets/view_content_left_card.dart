@@ -16,12 +16,10 @@ class ViewContentLeftCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Column(
-          children: [
-            ViewNameAndPriceWidget(product: product),
-            ViewTotalPriceAndRemoveItemInCart(product: product)
-          ],
-        ));
+      children: [
+        ViewNameAndPriceWidget(product: product),
+        ViewTotalPriceAndRemoveItemInCart(product: product)
+      ],
+    ));
   }
 }
-
-
