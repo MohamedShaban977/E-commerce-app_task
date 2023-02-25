@@ -1,4 +1,3 @@
-import 'package:e_commerce_app_task/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/app_manage/values_manager.dart';
@@ -16,8 +15,8 @@ class SearchBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-      child: CategoriesGridView(categoriesList: allResult ),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+      child: CategoriesGridView(categoriesList: allResult),
     );
   }
 }

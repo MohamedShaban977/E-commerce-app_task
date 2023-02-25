@@ -1,5 +1,6 @@
 import 'package:e_commerce_app_task/core/app_manage/color_manager.dart';
 import 'package:e_commerce_app_task/core/routes/magic_router.dart';
+import 'package:e_commerce_app_task/core/routes/routes_request.dart';
 import 'package:e_commerce_app_task/core/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class CardCategories extends StatelessWidget {
       child: MaterialButton(
         onPressed: () => MagicRouterName.navigateTo(
           RoutesNames.products,
-          arguments: {"id": "${categoriesEntity.id}"},
+          arguments: RouteRequest(id: '${categoriesEntity.id}').toJson(),
         ),
         splashColor: ColorManager.secondary,
         highlightColor: ColorManager.secondary,

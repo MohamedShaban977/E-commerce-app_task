@@ -17,14 +17,14 @@ class CategoriesGridView extends StatelessWidget {
       crossAxisCount: Responsive.isMobile(context)
           ? 1
           : Responsive.isTablet(context)
-          ? 2
-          : 3,
+              ? 2
+              : 3,
       childAspectRatio: 2.6,
       children: List.generate(
           categoriesList.length,
-              (index) => CardCategories(
-            categoriesEntity:  categoriesList[index],
-          )),
+          (index) => CardCategories(
+                categoriesEntity: categoriesList[index],
+              )),
     );
   }
 }

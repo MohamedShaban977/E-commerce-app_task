@@ -1,6 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
-import 'package:e_commerce_app_task/core/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +11,6 @@ import '../../../../widgets/custom_error_widget.dart';
 import '../../../../widgets/custom_loading_widget.dart';
 import '../../../main_layout_app/presentation/widgets/custom_drawer.dart';
 import '../cubit/categories_cubit.dart';
-import '../widgets/card_categories_widget.dart';
 import '../widgets/categories_custom_search_delegate.dart';
 import '../widgets/categories_grid_view_widget.dart';
 
@@ -81,4 +79,3 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     }
   }
 }
-

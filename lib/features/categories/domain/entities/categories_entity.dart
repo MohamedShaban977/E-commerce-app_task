@@ -13,4 +13,3 @@ class CategoriesEntity extends Equatable {
   @override
   List<Object?> get props => [id, name, imageLink];
 }
-
