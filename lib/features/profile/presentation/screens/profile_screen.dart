@@ -11,9 +11,11 @@ import '../../../../app/injection_container.dart';
 import '../../../../core/app_manage/color_manager.dart';
 import '../../../../core/cache/cache_data_shpref.dart';
 import '../../../../core/service/locale_service/manager/locale_cubit.dart';
+import '../../../../widgets/custom_image_network_view.dart';
 
+const String url =
+    'https://images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
-const String url = 'https://images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -37,7 +39,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   SizedBox(height: context.height * 0.02),
-
                   _buildCardViewInfo(context),
                   SizedBox(height: context.height * 0.02),
                   CustomButtonProfile(
@@ -86,7 +87,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          child: Image.network(url),
+          child: CustomViewImageNetwork(
+            image: url,
+            height: 250.0,
+            width: context.width,
+          ),
         ),
       ],
     );
