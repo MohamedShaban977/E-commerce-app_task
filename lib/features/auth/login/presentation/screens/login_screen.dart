@@ -1,17 +1,19 @@
-import 'package:e_commerce_app_task/core/app_manage/color_manager.dart';
-import 'package:e_commerce_app_task/core/app_manage/strings_manager.dart';
-import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
-import 'package:e_commerce_app_task/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:e_commerce_app_task/core/routes/magic_router.dart';
+import 'package:e_commerce_app_task/core/routes/routes_name.dart';
 import 'package:e_commerce_app_task/widgets/toast_and_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/injection_container.dart';
+import '../../../../../core/app_manage/color_manager.dart';
+import '../../../../../core/app_manage/strings_manager.dart';
+import '../../../../../core/app_manage/values_manager.dart';
 import '../../../../../core/responsive/responsive.dart';
 import '../../../../../widgets/unfocused_keyboard.dart';
 import '../../data/models/login_request.dart';
+import '../cubit/login_cubit.dart';
 import 'responsive/mobile_login_screen.dart';
 import 'responsive/tablet_login_screen.dart';
 
@@ -76,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (state is LoginSuccessState) {
       ToastAndSnackBar.toastSuccess(
           message: AppStrings.verificationCompletedSuccessfully.tr());
+      MagicRouterName.navigateAndPopAll(RoutesNames.mainLayoutApp);
     }
     if (state is LoginErrorState) {
       ToastAndSnackBar.toastError(message: state.error);

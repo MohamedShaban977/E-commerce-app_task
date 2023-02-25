@@ -1,13 +1,3 @@
-
-/*
-{
-"username": "kortobaa2",
- "password": "kortobaa",
- "email":"kortobaa@kortobaa.com",
- "first_name":"kortobaa",
- "last_name":"kortobaa"
- }
- */
 class SignUpRequest {
   SignUpRequest({
     required this.username,
@@ -24,10 +14,10 @@ class SignUpRequest {
   String lastName;
 
   Map<String, dynamic> toJson() => {
-    "username": username,
-    "password": password,
-    "email": email,
-    "first_name": firstName,
-    "last_name": lastName,
-  };
+        "username": username,
+        "password": password,
+        "email": email,
+        "first_name": firstName,
+        "last_name": lastName,
+      };
 }

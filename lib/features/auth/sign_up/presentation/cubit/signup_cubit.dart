@@ -15,18 +15,17 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   final SignUpUseCases signupUseCases;
 
-
   SignUpCubit get(context) => BlocProvider.of(context);
-
 
   Future<void> signUp(SignUpRequest request) async {
     emit(SignUpLoadingState());
     Either<Failure, SignUpEntity> response = await signupUseCases.call(request);
 
     response.fold(
-            (failure) => emit(SignUpErrorState(error: HandleFailure.mapFailureToMsg(failure))),
-            (response) => emit(SignUpSuccessState(response: response)),
-        );
+      (failure) =>
+          emit(SignUpErrorState(error: HandleFailure.mapFailureToMsg(failure))),
+      (response) => emit(SignUpSuccessState(response: response)),
+    );
   }
 
   IconData suffix = Icons.remove_red_eye;
@@ -38,5 +37,4 @@ class SignUpCubit extends Cubit<SignUpState> {
     suffix = isPassword ? Icons.remove_red_eye : Icons.visibility_off_outlined;
     emit(PassVisibilityState());
   }
-
 }

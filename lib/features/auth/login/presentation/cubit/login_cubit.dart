@@ -15,18 +15,17 @@ class LoginCubit extends Cubit<LoginState> {
 
   final LoginUseCases loginUseCases;
 
-
   LoginCubit get(context) => BlocProvider.of(context);
-
 
   Future<void> login(LoginRequest request) async {
     emit(LoginLoadingState());
     Either<Failure, LoginEntity> response = await loginUseCases.call(request);
 
     response.fold(
-            (failure) => emit(LoginErrorState(error: HandleFailure.mapFailureToMsg(failure))),
-            (response) => emit(LoginSuccessState(response: response)),
-        );
+      (failure) =>
+          emit(LoginErrorState(error: HandleFailure.mapFailureToMsg(failure))),
+      (response) => emit(LoginSuccessState(response: response)),
+    );
   }
 
   IconData suffix = Icons.remove_red_eye;
@@ -38,5 +37,4 @@ class LoginCubit extends Cubit<LoginState> {
     suffix = isPassword ? Icons.remove_red_eye : Icons.visibility_off_outlined;
     emit(PassVisibilityState());
   }
-
 }

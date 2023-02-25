@@ -1,6 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
-import 'package:e_commerce_app_task/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +10,7 @@ import '../../../../../../core/app_manage/values_manager.dart';
 import '../../../../../../core/validation/validation.dart';
 import '../../../../../../widgets/custom_button_with_loading.dart';
 import '../../../../../../widgets/custom_text_form_field.dart';
+import '../../cubit/login_cubit.dart';
 import '../../widgets/custom_button_lang_widget.dart';
 import '../../widgets/register_button_row_text_widget.dart';
 
@@ -60,6 +60,8 @@ class MobileLoginScreen extends StatelessWidget {
               CustomTextFormField(
                 label: AppStrings.userName.tr(),
                 controller: userName,
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
                 validator: (value) => Validator.isValidUserName(userName.text),
               ),
 
@@ -72,8 +74,10 @@ class MobileLoginScreen extends StatelessWidget {
                   return CustomTextFormField(
                     label: AppStrings.password.tr(),
                     controller: password,
-                    obscureText:cubit.isPassword ,
+                    obscureText: cubit.isPassword,
                     iconData: cubit.suffix,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
                     onTapIcon: () => cubit.changePassVisibility(),
                     validator: (value) =>
                         Validator.isValidPassword(password.text),

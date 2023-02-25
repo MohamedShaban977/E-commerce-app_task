@@ -1,6 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/presentation/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +10,8 @@ import '../../../../../../core/app_manage/values_manager.dart';
 import '../../../../../../core/validation/validation.dart';
 import '../../../../../../widgets/custom_button_with_loading.dart';
 import '../../../../../../widgets/custom_text_form_field.dart';
-import '../../widgets/custom_button_lang_widget.dart';
+import '../../../../login/presentation/widgets/custom_button_lang_widget.dart';
+import '../../cubit/signup_cubit.dart';
 import '../../widgets/login_button_row_text_widget.dart';
 
 class MobileSignUpScreen extends StatelessWidget {
@@ -68,6 +68,8 @@ class MobileSignUpScreen extends StatelessWidget {
               CustomTextFormField(
                 label: AppStrings.userName.tr(),
                 controller: userName,
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
                 validator: (value) => Validator.isValidUserName(userName.text),
               ),
 
@@ -77,6 +79,8 @@ class MobileSignUpScreen extends StatelessWidget {
               CustomTextFormField(
                 label: AppStrings.email.tr(),
                 controller: email,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
                 validator: (value) => Validator.isValidEmail(email.text),
               ),
 
@@ -85,7 +89,9 @@ class MobileSignUpScreen extends StatelessWidget {
               /// first name
               CustomTextFormField(
                 label: AppStrings.firstName.tr(),
-                controller:firstName,
+                controller: firstName,
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
                 validator: (value) => Validator.isValidUserName(firstName.text),
               ),
 
@@ -95,12 +101,12 @@ class MobileSignUpScreen extends StatelessWidget {
               CustomTextFormField(
                 label: AppStrings.lastName.tr(),
                 controller: lastName,
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
                 validator: (value) => Validator.isValidUserName(lastName.text),
               ),
 
               const SizedBox(height: AppSize.s16),
-
-
 
               /// password
               BlocBuilder<SignUpCubit, SignUpState>(
@@ -109,7 +115,9 @@ class MobileSignUpScreen extends StatelessWidget {
                   return CustomTextFormField(
                     label: AppStrings.password.tr(),
                     controller: password,
-                    obscureText:cubit.isPassword ,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.next,
+                    obscureText: cubit.isPassword,
                     iconData: cubit.suffix,
                     onTapIcon: () => cubit.changePassVisibility(),
                     validator: (value) =>
@@ -126,10 +134,13 @@ class MobileSignUpScreen extends StatelessWidget {
                   return CustomTextFormField(
                     label: AppStrings.passwordConfirmation.tr(),
                     controller: passwordConfirmation,
-                    obscureText:cubit.isPassword ,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    obscureText: cubit.isPassword,
                     iconData: cubit.suffix,
                     onTapIcon: () => cubit.changePassVisibility(),
-                    validator: (value) => Validator.isValidConfirmPassword(password.text,passwordConfirmation.text),
+                    validator: (value) => Validator.isValidConfirmPassword(
+                        password.text, passwordConfirmation.text),
                   );
                 },
               ),

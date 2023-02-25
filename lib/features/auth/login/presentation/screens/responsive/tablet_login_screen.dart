@@ -18,9 +18,9 @@ import '../../widgets/register_button_row_text_widget.dart';
 class TabletLoginScreen extends StatelessWidget {
   const TabletLoginScreen(
       {Key? key,
-        required this.userName,
-        required this.password,
-        required this.onTap})
+      required this.userName,
+      required this.password,
+      required this.onTap})
       : super(key: key);
 
   final TextEditingController userName;
@@ -72,6 +72,8 @@ class TabletLoginScreen extends StatelessWidget {
                         ///
                         CustomTextFormField(
                             label: AppStrings.userName.tr(),
+                            keyboardType: TextInputType.name,
+                            textInputAction: TextInputAction.next,
                             controller: userName),
 
                         const SizedBox(height: AppSize.s16),
@@ -83,10 +85,13 @@ class TabletLoginScreen extends StatelessWidget {
                             return CustomTextFormField(
                               label: AppStrings.password.tr(),
                               controller: password,
-                              obscureText:cubit.isPassword ,
+                              keyboardType: TextInputType.visiblePassword,
+                              textInputAction: TextInputAction.done,
+                              obscureText: cubit.isPassword,
                               iconData: cubit.suffix,
                               onTapIcon: () => cubit.changePassVisibility(),
-                              validator: (value) => Validator.isValidPassword(password.text),
+                              validator: (value) =>
+                                  Validator.isValidPassword(password.text),
                             );
                           },
                         ),

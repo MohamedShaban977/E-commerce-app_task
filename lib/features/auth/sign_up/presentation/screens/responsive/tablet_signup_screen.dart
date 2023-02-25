@@ -8,15 +8,15 @@ import '../../../../../../core/app_manage/values_manager.dart';
 import '../../../../../../core/responsive/responsive.dart';
 import '../../../../../../widgets/custom_button_with_loading.dart';
 import '../../../../../../widgets/custom_text_form_field.dart';
-import '../../widgets/custom_button_lang_widget.dart';
+import '../../../../login/presentation/widgets/custom_button_lang_widget.dart';
 import '../../widgets/login_button_row_text_widget.dart';
 
 class TabletLoginScreen extends StatelessWidget {
   const TabletLoginScreen(
       {Key? key,
-        required this.userName,
-        required this.password,
-        required this.onTap})
+      required this.userName,
+      required this.password,
+      required this.onTap})
       : super(key: key);
 
   final TextEditingController userName;

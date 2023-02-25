@@ -31,7 +31,7 @@ class CustomButtonChangeLanguageWidget extends StatelessWidget {
           padding: const EdgeInsets.all(AppPadding.p8),
           child: SizedBox(
             width: AppSize.s25,
-            height:  AppSize.s25,
+            height: AppSize.s25,
             child: Center(
               child: Text(
                 AppStrings.lang.tr(),

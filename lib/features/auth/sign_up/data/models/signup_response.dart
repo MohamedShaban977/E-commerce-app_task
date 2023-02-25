@@ -3,7 +3,7 @@ import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import '../../domain/entities/signup_entity.dart';
 
 class SignUpResponse extends SignUpEntity {
-   SignUpResponse({
+  SignUpResponse({
     final User? user,
     final String? message,
   }) : super(user: user, message: message.orEmpty());
@@ -12,7 +12,6 @@ class SignUpResponse extends SignUpEntity {
         user: json["user"] == null ? null : User.fromJson(json["user"]),
         message: json["message"],
       );
-
 }
 
 class User extends UserEntity {

@@ -1,5 +1,3 @@
-import 'package:e_commerce_app_task/features/auth/sign_up/data/models/signup_request.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/presentation/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +6,12 @@ import '../../../../../app/injection_container.dart';
 import '../../../../../core/app_manage/color_manager.dart';
 import '../../../../../core/app_manage/values_manager.dart';
 import '../../../../../core/responsive/responsive.dart';
+import '../../../../../core/routes/magic_router.dart';
+import '../../../../../core/routes/routes_name.dart';
 import '../../../../../widgets/toast_and_snackbar.dart';
 import '../../../../../widgets/unfocused_keyboard.dart';
+import '../../data/models/signup_request.dart';
+import '../cubit/signup_cubit.dart';
 import 'responsive/mobile_signup_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -93,6 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
   void _listener(context, state) {
     if (state is SignUpSuccessState) {
       ToastAndSnackBar.toastSuccess(message: state.response.message);
+      MagicRouterName.navigateAndPopUntilFirstPage(RoutesNames.loginRoute);
     }
     if (state is SignUpErrorState) {
       ToastAndSnackBar.toastError(message: state.error);

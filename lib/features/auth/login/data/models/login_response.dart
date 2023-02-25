@@ -6,16 +6,10 @@ class LoginResponse extends LoginEntity {
   LoginResponse({
     String? refresh,
     String? access,
-  }): super(
-    access: access.orEmpty(),
-    refresh: refresh.orEmpty()
-  );
-
+  }) : super(access: access.orEmpty(), refresh: refresh.orEmpty());
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-    refresh: json["refresh"],
-    access: json["access"],
-  );
-
-
+        refresh: json["refresh"],
+        access: json["access"],
+      );
 }
