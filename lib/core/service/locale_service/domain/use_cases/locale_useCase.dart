@@ -10,7 +10,8 @@ class ChangeLangUseCase implements UseCase<bool, String> {
   ChangeLangUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, bool>> call(String langCode) async => await repository.changeLang(langCode: langCode);
+  Future<Either<Failure, bool>> call(String langCode) async =>
+      await repository.changeLang(langCode: langCode);
 }
 
 class GetSavedLangUseCase implements UseCase<String, NoParams> {
@@ -19,5 +20,6 @@ class GetSavedLangUseCase implements UseCase<String, NoParams> {
   GetSavedLangUseCase({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call(NoParams params) async => await repository.getSavedLang();
+  Future<Either<Failure, String>> call(NoParams params) async =>
+      await repository.getSavedLang();
 }

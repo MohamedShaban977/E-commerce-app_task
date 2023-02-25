@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../app/injection_container.dart';
-import '../app_manage/contents_manager.dart';
 import '../cache/cache_data_shpref.dart';
 
 class AppInterceptors extends Interceptor {
@@ -41,8 +40,7 @@ class AppInterceptors extends Interceptor {
         'Accept': '*/*',
         'Authorization': 'Bearer ${sl<CacheHelper>().getToken()}',
       };
-    }
-    else {
+    } else {
       options.headers = {
         "Content-Type": options.data.runtimeType == FormData
             ? 'multipart/form-data'

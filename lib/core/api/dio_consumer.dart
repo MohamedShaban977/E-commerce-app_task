@@ -18,8 +18,10 @@ class DioConsumer implements ApiConsumer {
 
   DioConsumer({required this.client}) {
     if (!kIsWeb) {
-      (client.httpClientAdapter as IOHttpClientAdapter ).onHttpClientCreate = (HttpClient client) {
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      (client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+          (HttpClient client) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
         return client;
       };
     }
@@ -30,11 +32,6 @@ class DioConsumer implements ApiConsumer {
       ..receiveDataWhenStatusError = true
       ..receiveTimeout = const Duration(seconds: 60)
       ..connectTimeout = const Duration(seconds: 60)
-      // ..headers = {
-      // "contentType": "application/json",
-      //   'Accept': '*/*',
-      //   // 'Authorization': 'Bearer ${sl<CacheHelper>().getToken()}',
-      // }
       ..validateStatus = (status) {
         return status! < StatusCode.internalServerError;
       };
@@ -140,8 +137,7 @@ class DioConsumer implements ApiConsumer {
         throw ErrorOtherException(message: error.message);
 
       case DioErrorType.badCertificate:
-        // TODO: Handle this case.
-        break;
+        throw const ConflictException();
     }
   }
 
@@ -150,7 +146,7 @@ class DioConsumer implements ApiConsumer {
       case StatusCode.badRequest:
         throw const BadRequestException();
       case StatusCode.unauthorized:
-        throw  const UnauthorizedException();
+        throw const UnauthorizedException();
 
       case StatusCode.forbidden:
         throw const UnauthorizedException();
@@ -170,13 +166,15 @@ class DioConsumer implements ApiConsumer {
     switch (response.statusCode) {
       case StatusCode.badRequest:
         final json = jsonDecode(response.data);
-        final ErrorBadRequestResponse res=  ErrorBadRequestResponse.fromJson(json);
-        throw  BadRequestException('${res.username?.first ??'' } , ${res.password?.first ??'' }');
+        final ErrorBadRequestResponse res =
+            ErrorBadRequestResponse.fromJson(json);
+        throw BadRequestException(
+            '${res.username?.first ?? ''} , ${res.password ?? ''}');
       case StatusCode.unauthorized:
         final json = jsonDecode(response.data);
-        final ErrorUnauthorizedResponse res=  ErrorUnauthorizedResponse.fromJson(json);
-        throw  UnauthorizedException(res.detail);
-
+        final ErrorUnauthorizedResponse res =
+            ErrorUnauthorizedResponse.fromJson(json);
+        throw UnauthorizedException(res.detail);
       case StatusCode.forbidden:
         throw const UnauthorizedException();
       case StatusCode.notFound:

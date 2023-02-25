@@ -7,15 +7,16 @@ import '../core/app_manage/values_manager.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
       {Key? key,
-        this.onSaved,
-        this.controller,
-        this.validator,
-        required this.label,
-        this.keyboardType,
-        this.textInputAction,
-        this.prefixIcon,
-        this.iconData,
-        this.onTapIcon,  this.obscureText = false})
+      this.onSaved,
+      this.controller,
+      this.validator,
+      required this.label,
+      this.keyboardType,
+      this.textInputAction,
+      this.prefixIcon,
+      this.iconData,
+      this.onTapIcon,
+      this.obscureText = false})
       : super(key: key);
 
   final String label;
@@ -31,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? iconData;
   final Widget? prefixIcon;
   final void Function()? onTapIcon;
-  final bool obscureText ;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class CustomTextFormField extends StatelessWidget {
           onSaved: onSaved,
           controller: controller,
           validator: validator,
-          obscureText:obscureText,
+          obscureText: obscureText,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
 

@@ -55,7 +55,6 @@ TextStyle getBoldStyle({
   return _getTextStyle(fontSize, FontWeightManager.bold, color);
 }
 
-
 // extraBold style
 TextStyle getExtraBoldStyle({
   double fontSize = FontSize.s12,

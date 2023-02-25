@@ -20,15 +20,17 @@ class AppLocalizations {
   static dynamic _localizedStrings;
 
   Future<void> load() async {
-    String jsonString = await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
+    String jsonString =
+        await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
-      _localizedStrings =  jsonMap.map<String, dynamic>((key, value) {
+    _localizedStrings = jsonMap.map<String, dynamic>((key, value) {
       return MapEntry(key, value.toString());
     });
   }
 
-  static String translate(String key) => _localizedStrings?[key]?.toString() ?? key;
+  static String translate(String key) =>
+      _localizedStrings?[key]?.toString() ?? key;
 
   /// {
   ///    "msg":"{} are written in the {} language",

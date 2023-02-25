@@ -1,23 +1,23 @@
-import 'package:e_commerce_app_task/features/auth/sign_up/presentation/cubit/signup_cubit.dart';
-import 'package:e_commerce_app_task/features/categories/presentation/cubit/categories_cubit.dart';
-import 'package:e_commerce_app_task/features/home/presentation/cubit/home_cubit.dart';
-import 'package:e_commerce_app_task/features/products/presentation/cubit/products_cubit.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../app/injection_container.dart';
 import '../../features/auth/login/presentation/cubit/login_cubit.dart';
 import '../../features/auth/login/presentation/screens/login_screen.dart';
+import '../../features/auth/sign_up/presentation/cubit/signup_cubit.dart';
 import '../../features/auth/sign_up/presentation/screens/signup_screen.dart';
+import '../../features/categories/presentation/cubit/categories_cubit.dart';
+import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../../features/main_layout_app/presentation/screens/main_layout_app.dart';
 import '../../features/product_details/presentation/cubit/product_details_cubit.dart';
 import '../../features/product_details/presentation/screens/product_details_screen.dart';
+import '../../features/products/presentation/cubit/products_cubit.dart';
 import '../../features/products/presentation/screens/products_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/wishlist/presentation/cubit/wishlist_cubit.dart';
 import '../app_manage/strings_manager.dart';
 import 'magic_router.dart';
+import 'routes_request.dart';
 import 'routes_name.dart';
 
 class Routes {
@@ -26,16 +26,15 @@ class Routes {
       case RoutesNames.initialRoute:
         return MagicRouter.pageRoute(const SplashScreen());
 
-    // loginRoute
+      // loginRoute
       case RoutesNames.loginRoute:
         ServiceLocator.initLoginGetIt();
-
         return MagicRouter.pageRoute(BlocProvider(
           create: (context) => sl<LoginCubit>(),
           child: const LoginScreen(),
         ));
 
-    // signupRoute
+      // signupRoute
       case RoutesNames.signupRoute:
         ServiceLocator.initSignUpGetIt();
         return MagicRouter.pageRoute(BlocProvider(
@@ -43,7 +42,7 @@ class Routes {
           child: const SignupScreen(),
         ));
 
-    // mainLayoutApp
+      // mainLayoutApp
       case RoutesNames.mainLayoutApp:
         ServiceLocator.initCategoriesGetIt();
         ServiceLocator.initProductsGetIt();
@@ -53,16 +52,10 @@ class Routes {
         return MagicRouter.pageRoute(MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) =>
-              sl<CategoriesCubit>()
-                ..categories(),
-            ),
+                create: (context) => sl<CategoriesCubit>()..categories()),
+            BlocProvider(create: (context) => sl<HomeCubit>()),
             BlocProvider(
-              create: (context) => HomeCubit(),
-            ),
-            BlocProvider(
-              create: (context) =>
-              sl<ProductsCubit>()
+              create: (context) => sl<ProductsCubit>()
                 ..getProductsMostPopular()
                 ..getProductsMostRecent(),
             ),
@@ -70,40 +63,32 @@ class Routes {
           child: const MainLayoutAppScreen(),
         ));
 
-    // productDetails
+      // productDetails
       case RoutesNames.productDetails:
         ServiceLocator.initProductDetailsByIdGetIt();
-        final arguments = settings.arguments! as Map<String, dynamic>;
-        final String id = arguments["id"].toString();
-        if (kDebugMode) {
-          print(arguments);
-        }
+        final RouteRequest res =
+            RouteRequest.fromJson(settings.arguments! as Map<String, dynamic>);
         return MagicRouter.pageRoute(MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (context) =>
-              sl<ProductDetailsCubit>()
-                ..getProductDetailsById(id: id),
+                  sl<ProductDetailsCubit>()..getProductDetailsById(id: res.id!),
             ),
-            BlocProvider.value(
-              value: sl<WishlistCubit>(),
-            ),
+            BlocProvider.value(value: sl<WishlistCubit>()),
           ],
-          child: ProductDetailsScreen(id: id),
+          child: ProductDetailsScreen(id: res.id!),
         ));
 
-
-    // productDetails
+      // products
       case RoutesNames.products:
         ServiceLocator.initProductsGetIt();
-        final arguments = settings.arguments! as Map<String, dynamic>;
-        final String id = arguments["id"].toString();
-        if (kDebugMode) {
-          print(arguments);
-        }
+
+        final RouteRequest res =
+            RouteRequest.fromJson(settings.arguments! as Map<String, dynamic>);
         return MagicRouter.pageRoute(BlocProvider(
-          create: (context) => sl<ProductsCubit>()..getProductsByCategory(idCategory: id),
-          child:  ProductsScreen(id: id),
+          create: (context) =>
+              sl<ProductsCubit>()..getProductsByCategory(idCategory: res.id!),
+          child: ProductsScreen(id: res.id!),
         ));
 
       default:

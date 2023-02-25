@@ -12,19 +12,17 @@ class ServerException extends Equatable implements Exception {
   String toString() => '$message';
 }
 
-
-
 class FetchDataException extends ServerException {
   const FetchDataException([message]) : super("Error During Communication");
 }
 
 class BadRequestException extends ServerException {
-  const BadRequestException([message]) : super("Bad Request ${message??''}");
+  const BadRequestException([message]) : super("Bad Request ${message ?? ''}");
 }
 
 class UnauthorizedException extends ServerException {
-
-  const UnauthorizedException([message]) : super("Unauthorized  ${message??''}");
+  const UnauthorizedException([message])
+      : super("Unauthorized  ${message ?? ''}");
 }
 
 class MethodNotAllowed extends ServerException {
@@ -45,12 +43,13 @@ class InternalServerErrorException extends ServerException {
 }
 
 class NoInternetConnectionException extends ServerException {
-  const NoInternetConnectionException([message]) : super("No Internet Connection");
+  const NoInternetConnectionException([message])
+      : super("No Internet Connection");
 }
 
 class ErrorOtherException extends ServerException {
-  const ErrorOtherException({required String? message}) : super("Error Other Exception $message");
+  const ErrorOtherException({required String? message})
+      : super("Error Other Exception $message");
 }
-
 
 class CacheException implements Exception {}

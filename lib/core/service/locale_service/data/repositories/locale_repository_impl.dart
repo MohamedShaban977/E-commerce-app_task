@@ -15,7 +15,7 @@ class LocaleRepositoryImpl implements LocaleRepository {
     try {
       final lang = await dataSource.changeLang(langCode: langCode);
       return Right(lang);
-    } on CacheException  {
+    } on CacheException {
       return left(const CacheFailure());
     }
   }

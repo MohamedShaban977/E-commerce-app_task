@@ -1,10 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/data/data_sources/signup_data_source.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/data/repositories/signup_repositories_impl.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/domain/repositories/signup_repositories.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/domain/use_cases/signup_use_case.dart';
-import 'package:e_commerce_app_task/features/auth/sign_up/presentation/cubit/signup_cubit.dart';
-import 'package:e_commerce_app_task/features/carts/presentation/cubit/carts_cubit.dart';
+import 'package:e_commerce_app_task/features/home/presentation/cubit/home_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +19,11 @@ import '../features/auth/login/data/repositories/login_repositories_impl.dart';
 import '../features/auth/login/domain/repositories/login_repositories.dart';
 import '../features/auth/login/domain/use_cases/login_use_case.dart';
 import '../features/auth/login/presentation/cubit/login_cubit.dart';
+import '../features/auth/sign_up/data/data_sources/signup_data_source.dart';
+import '../features/auth/sign_up/data/repositories/signup_repositories_impl.dart';
+import '../features/auth/sign_up/domain/repositories/signup_repositories.dart';
+import '../features/auth/sign_up/domain/use_cases/signup_use_case.dart';
+import '../features/auth/sign_up/presentation/cubit/signup_cubit.dart';
 import '../features/carts/data/data_sources/cart_local_data_sources.dart';
 import '../features/carts/data/repositories/cart_repository_impl.dart';
 import '../features/carts/domain/repositories/cart_repository.dart';
@@ -31,6 +31,7 @@ import '../features/carts/domain/use_cases/delete_product_by_id_use_case.dart';
 import '../features/carts/domain/use_cases/get_product_by_id_use_case.dart';
 import '../features/carts/domain/use_cases/geta_all_products_use_case.dart';
 import '../features/carts/domain/use_cases/save_product_by_id_use_case.dart';
+import '../features/carts/presentation/cubit/carts_cubit.dart';
 import '../features/categories/data/data_sources/categories_data_sources.dart';
 import '../features/categories/data/repositories/categories_repository_impl.dart';
 import '../features/categories/domain/repositories/categories_repository.dart';
@@ -83,6 +84,7 @@ class ServiceLocator {
     // LocaleCubit
     sl.registerLazySingleton<LocaleCubit>(
         () => LocaleCubit(savedLangUseCase: sl(), changeLangUseCase: sl()));
+    sl.registerLazySingleton<HomeCubit>(() => HomeCubit());
     //Connection Cubit
     // sl.registerLazySingleton<ConnectionCubit>(() => ConnectionCubit(connectivity: sl(), checker: sl()));
 
@@ -116,140 +118,170 @@ class ServiceLocator {
 
   static initLoginGetIt() {
     //Login Data Source
-    if (!sl.isRegistered<LoginDataSource>())
+    if (!sl.isRegistered<LoginDataSource>()) {
       sl.registerFactory<LoginDataSource>(
           () => LoginDataSourceImpl(apiConsumer: sl<ApiConsumer>()));
+    }
     //Login Repository
-    if (!sl.isRegistered<LoginRepository>())
+    if (!sl.isRegistered<LoginRepository>()) {
       sl.registerFactory<LoginRepository>(
           () => LoginRepositoryImpl(dataSource: sl<LoginDataSource>()));
+    }
     //Login Use Cases
-    if (!sl.isRegistered<LoginUseCases>())
+    if (!sl.isRegistered<LoginUseCases>()) {
       sl.registerFactory<LoginUseCases>(
           () => LoginUseCases(repository: sl<LoginRepository>()));
+    }
     // Login Cubit
-    if (!GetIt.I.isRegistered<LoginCubit>())
+    if (!GetIt.I.isRegistered<LoginCubit>()) {
       sl.registerFactory<LoginCubit>(
           () => LoginCubit(loginUseCases: sl<LoginUseCases>()));
+    }
   }
 
   static initSignUpGetIt() {
-    //Login Data Source
-    if (!sl.isRegistered<SignUpDataSource>())
+    //SignUp Data Source
+    if (!sl.isRegistered<SignUpDataSource>()) {
       sl.registerFactory<SignUpDataSource>(
           () => SignUpDataSourceImpl(apiConsumer: sl<ApiConsumer>()));
-    //Login Repository
-    if (!sl.isRegistered<SignUpRepository>())
+    }
+    //SignUp Repository
+    if (!sl.isRegistered<SignUpRepository>()) {
       sl.registerFactory<SignUpRepository>(
           () => SignUpRepositoryImpl(dataSource: sl<SignUpDataSource>()));
-    //Login Use Cases
-    if (!sl.isRegistered<SignUpUseCases>())
+    }
+    //SignUp Use Cases
+    if (!sl.isRegistered<SignUpUseCases>()) {
       sl.registerFactory<SignUpUseCases>(
           () => SignUpUseCases(repository: sl<SignUpRepository>()));
-    // Login Cubit
-    if (!GetIt.I.isRegistered<SignUpCubit>())
+    }
+    // SignUp Cubit
+    if (!GetIt.I.isRegistered<SignUpCubit>()) {
       sl.registerFactory<SignUpCubit>(
           () => SignUpCubit(signupUseCases: sl<SignUpUseCases>()));
+    }
   }
 
   static initCategoriesGetIt() {
-    //Login Data Source
-    if (!sl.isRegistered<CategoriesDataSource>())
+    //Categories Data Source
+    if (!sl.isRegistered<CategoriesDataSource>()) {
       sl.registerFactory<CategoriesDataSource>(
           () => CategoriesDataSourceImpl(apiConsumer: sl<ApiConsumer>()));
-    //Login Repository
-    if (!sl.isRegistered<CategoriesRepository>())
+    }
+    //Categories Repository
+    if (!sl.isRegistered<CategoriesRepository>()) {
       sl.registerFactory<CategoriesRepository>(() =>
           CategoriesRepositoryImpl(dataSource: sl<CategoriesDataSource>()));
-    //Login Use Cases
-    if (!sl.isRegistered<CategoriesUseCases>())
+    }
+    //Categories Use Cases
+    if (!sl.isRegistered<CategoriesUseCases>()) {
       sl.registerFactory<CategoriesUseCases>(
           () => CategoriesUseCases(repository: sl<CategoriesRepository>()));
-    // Login Cubit
-    if (!sl.isRegistered<CategoriesCubit>())
+    }
+    // Categories Cubit
+    if (!sl.isRegistered<CategoriesCubit>()) {
       sl.registerFactory<CategoriesCubit>(
           () => CategoriesCubit(categoriesUseCases: sl<CategoriesUseCases>()));
+    }
   }
 
   static initProductsGetIt() {
-    //Login Data Source
-    if (!sl.isRegistered<ProductsDataSource>())
+    //Products Data Source
+    if (!sl.isRegistered<ProductsDataSource>()) {
       sl.registerFactory<ProductsDataSource>(
           () => ProductsDataSourceImpl(apiConsumer: sl<ApiConsumer>()));
-    //Login Repository
-    if (!sl.isRegistered<ProductsRepository>())
+    }
+    //Products Repository
+    if (!sl.isRegistered<ProductsRepository>()) {
       sl.registerFactory<ProductsRepository>(
           () => ProductsRepositoryImpl(dataSource: sl<ProductsDataSource>()));
-    //Login Use Cases
-    if (!sl.isRegistered<ProductsUseCase>())
+    }
+    //Products Use Cases
+    if (!sl.isRegistered<ProductsUseCase>()) {
       sl.registerFactory<ProductsUseCase>(
           () => ProductsUseCase(repository: sl<ProductsRepository>()));
-    if (!sl.isRegistered<ProductsByCategoryUseCase>())
+    }
+    if (!sl.isRegistered<ProductsByCategoryUseCase>()) {
       sl.registerFactory<ProductsByCategoryUseCase>(() =>
           ProductsByCategoryUseCase(repository: sl<ProductsRepository>()));
-    if (!sl.isRegistered<MostRecentProductsUseCase>())
+    }
+    if (!sl.isRegistered<MostRecentProductsUseCase>()) {
       sl.registerFactory<MostRecentProductsUseCase>(() =>
           MostRecentProductsUseCase(repository: sl<ProductsRepository>()));
-    if (!sl.isRegistered<MostPopularProductsUseCase>())
+    }
+    if (!sl.isRegistered<MostPopularProductsUseCase>()) {
       sl.registerFactory<MostPopularProductsUseCase>(() =>
           MostPopularProductsUseCase(repository: sl<ProductsRepository>()));
+    }
 
-    // Login Cubit
-    if (!sl.isRegistered<ProductsCubit>())
+    // Products Cubit
+    if (!sl.isRegistered<ProductsCubit>()) {
       sl.registerFactory<ProductsCubit>(() => ProductsCubit(
           productsUseCase: sl<ProductsUseCase>(),
           productsByCategoryUseCase: sl<ProductsByCategoryUseCase>(),
           mostRecentProductsUseCase: sl<MostRecentProductsUseCase>(),
           mostPopularProductsUseCase: sl<MostPopularProductsUseCase>()));
+    }
   }
 
   static initProductDetailsByIdGetIt() {
-    //Login Data Source
-    if (!sl.isRegistered<ProductDetailsDataSource>())
+    //ProductDetails Data Source
+    if (!sl.isRegistered<ProductDetailsDataSource>()) {
       sl.registerFactory<ProductDetailsDataSource>(
           () => ProductDetailsDataSourceImpl(apiConsumer: sl<ApiConsumer>()));
-    //Login Repository
-    if (!sl.isRegistered<ProductDetailsRepository>())
+    }
+    //ProductDetails Repository
+    if (!sl.isRegistered<ProductDetailsRepository>()) {
       sl.registerFactory<ProductDetailsRepository>(() =>
           ProductDetailsRepositoryImpl(
               dataSource: sl<ProductDetailsDataSource>()));
-    //Login Use Cases
-    if (!sl.isRegistered<ProductDetailsUseCase>())
+    }
+    //ProductDetails Use Cases
+    if (!sl.isRegistered<ProductDetailsUseCase>()) {
       sl.registerFactory<ProductDetailsUseCase>(() =>
           ProductDetailsUseCase(repository: sl<ProductDetailsRepository>()));
-    // Login Cubit
-    if (!sl.isRegistered<ProductDetailsCubit>())
+    }
+    // ProductDetails Cubit
+    if (!sl.isRegistered<ProductDetailsCubit>()) {
       sl.registerFactory<ProductDetailsCubit>(() => ProductDetailsCubit(
           productDetailsUseCase: sl<ProductDetailsUseCase>()));
+    }
   }
 
   static initWishlistGetIt() {
-    //Login Data Source
-    if (!sl.isRegistered<WishlistLocalDataSource>())
+    //Wishlist Data Source
+    if (!sl.isRegistered<WishlistLocalDataSource>()) {
       sl.registerLazySingleton<WishlistLocalDataSource>(
           () => WishlistLocalDataSourceImpl());
-    //Login Repository
-    if (!sl.isRegistered<WishlistRepository>())
+    }
+    //Wishlist Repository
+    if (!sl.isRegistered<WishlistRepository>()) {
       sl.registerLazySingleton<WishlistRepository>(() =>
           WishlistRepositoryImpl(dataSource: sl<WishlistLocalDataSource>()));
-    //Login Use Cases
-    if (!sl.isRegistered<SaveProductByIdUseCase>())
+    }
+    //Wishlist Use Cases
+    if (!sl.isRegistered<SaveProductByIdUseCase>()) {
       sl.registerLazySingleton<SaveProductByIdUseCase>(
           () => SaveProductByIdUseCase(repository: sl<WishlistRepository>()));
-    if (!sl.isRegistered<GetAllProductsUseCase>())
+    }
+    if (!sl.isRegistered<GetAllProductsUseCase>()) {
       sl.registerLazySingleton<GetAllProductsUseCase>(
           () => GetAllProductsUseCase(repository: sl<WishlistRepository>()));
-    if (!sl.isRegistered<GetProductByIdUseCase>())
+    }
+    if (!sl.isRegistered<GetProductByIdUseCase>()) {
       sl.registerLazySingleton<GetProductByIdUseCase>(
           () => GetProductByIdUseCase(repository: sl<WishlistRepository>()));
-    if (!sl.isRegistered<DeleteProductByIdUseCase>())
+    }
+    if (!sl.isRegistered<DeleteProductByIdUseCase>()) {
       sl.registerLazySingleton<DeleteProductByIdUseCase>(
           () => DeleteProductByIdUseCase(repository: sl<WishlistRepository>()));
-    if (!sl.isRegistered<CheckIfProductFavoriteUseCase>())
+    }
+    if (!sl.isRegistered<CheckIfProductFavoriteUseCase>()) {
       sl.registerLazySingleton<CheckIfProductFavoriteUseCase>(() =>
           CheckIfProductFavoriteUseCase(repository: sl<WishlistRepository>()));
-    // Login Cubit
-    if (!sl.isRegistered<WishlistCubit>())
+    }
+    // Wishlist Cubit
+    if (!sl.isRegistered<WishlistCubit>()) {
       sl.registerLazySingleton<WishlistCubit>(() => WishlistCubit(
             saveProduct: sl<SaveProductByIdUseCase>(),
             getAllProducts: sl<GetAllProductsUseCase>(),
@@ -257,40 +289,46 @@ class ServiceLocator {
             deleteProductById: sl<DeleteProductByIdUseCase>(),
             checkIfProductFavorite: sl<CheckIfProductFavoriteUseCase>(),
           ));
+    }
   }
 
-
-
   static initCartGetIt() {
-    //Login Data Source
-    if (!sl.isRegistered<CartLocalDataSource>())
+    //Cart Data Source
+    if (!sl.isRegistered<CartLocalDataSource>()) {
       sl.registerLazySingleton<CartLocalDataSource>(
-              () => CartLocalDataSourceImpl());
-    //Login Repository
-    if (!sl.isRegistered<CartRepository>())
-      sl.registerLazySingleton<CartRepository>(() =>
-          CartRepositoryImpl(dataSource: sl<CartLocalDataSource>()));
-    //Login Use Cases
-    if (!sl.isRegistered<SaveCartProductByIdUseCase>())
+          () => CartLocalDataSourceImpl());
+    }
+    //Cart Repository
+    if (!sl.isRegistered<CartRepository>()) {
+      sl.registerLazySingleton<CartRepository>(
+          () => CartRepositoryImpl(dataSource: sl<CartLocalDataSource>()));
+    }
+    //Cart Use Cases
+    if (!sl.isRegistered<SaveCartProductByIdUseCase>()) {
       sl.registerLazySingleton<SaveCartProductByIdUseCase>(
-              () => SaveCartProductByIdUseCase(repository: sl<CartRepository>()));
-    if (!sl.isRegistered<GetAllCartProductsUseCase>())
+          () => SaveCartProductByIdUseCase(repository: sl<CartRepository>()));
+    }
+    if (!sl.isRegistered<GetAllCartProductsUseCase>()) {
       sl.registerLazySingleton<GetAllCartProductsUseCase>(
-              () => GetAllCartProductsUseCase(repository: sl<CartRepository>()));
-    if (!sl.isRegistered<GetCartProductByIdUseCase>())
+          () => GetAllCartProductsUseCase(repository: sl<CartRepository>()));
+    }
+    if (!sl.isRegistered<GetCartProductByIdUseCase>()) {
       sl.registerLazySingleton<GetCartProductByIdUseCase>(
-              () => GetCartProductByIdUseCase(repository: sl<CartRepository>()));
-    if (!sl.isRegistered<DeleteCartProductByIdUseCase>())
+          () => GetCartProductByIdUseCase(repository: sl<CartRepository>()));
+    }
+    if (!sl.isRegistered<DeleteCartProductByIdUseCase>()) {
       sl.registerLazySingleton<DeleteCartProductByIdUseCase>(
-              () => DeleteCartProductByIdUseCase(repository: sl<CartRepository>()));
+          () => DeleteCartProductByIdUseCase(repository: sl<CartRepository>()));
+    }
 
-    ///
-    if (!sl.isRegistered<CartsCubit>())
+    // Cart Use Cubit
+    if (!sl.isRegistered<CartsCubit>()) {
       sl.registerLazySingleton<CartsCubit>(() => CartsCubit(
-        saveProduct: sl<SaveCartProductByIdUseCase>(),
-        getAllProducts: sl<GetAllCartProductsUseCase>(),
-        getProductById: sl<GetCartProductByIdUseCase>(),
-        deleteProductById: sl<DeleteCartProductByIdUseCase>(),
-      ));
+            saveProduct: sl<SaveCartProductByIdUseCase>(),
+            getAllProducts: sl<GetAllCartProductsUseCase>(),
+            getProductById: sl<GetCartProductByIdUseCase>(),
+            deleteProductById: sl<DeleteCartProductByIdUseCase>(),
+          ));
+    }
   }
 }

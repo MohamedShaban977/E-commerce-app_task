@@ -25,8 +25,7 @@ class CacheHelper {
   Future<bool> removeData({required String key}) async =>
       await sharedPreferences.remove(key);
 
-
-  String? getToken (){
+  String? getToken() {
     return getData(key: Constants.cachedDataLogin);
   }
 }

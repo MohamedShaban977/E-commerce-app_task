@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 
 extension TextStyleExtension on BuildContext {
-
   TextStyle get displayLarge => Theme.of(this).textTheme.displayLarge!;
+
   TextStyle get bodyLarge => Theme.of(this).textTheme.bodyLarge!;
 
   TextStyle get displaySmall => Theme.of(this).textTheme.displaySmall!;
+
   TextStyle get displayMedium => Theme.of(this).textTheme.displayMedium!;
+
   TextStyle get titleMedium => Theme.of(this).textTheme.titleMedium!;
 
   TextStyle get titleLarge => Theme.of(this).textTheme.titleLarge!;
 
-  // TextStyle get bodyLarge => Theme.of(this).textTheme.bodyLarge!;
-
   TextStyle get labelLarge => Theme.of(this).textTheme.labelLarge!;
 
-  ///text
-TextStyle get bodyMedium => Theme.of(this).textTheme.bodyMedium!;
-  ///text
-TextStyle get bodySmall => Theme.of(this).textTheme.bodySmall!;
+  TextStyle get bodyMedium => Theme.of(this).textTheme.bodyMedium!;
 
-
-
+  TextStyle get bodySmall => Theme.of(this).textTheme.bodySmall!;
 }
 
 extension MediaQueryValues on BuildContext {
@@ -36,7 +32,9 @@ extension MediaQueryValues on BuildContext {
   double get appBarH => AppBar().preferredSize.height;
 
   double get heightBody => height - topPadding - bottomPadding - appBarH;
-  double get heightBodyWithNav => height - topPadding - bottomPadding - appBarH - 65;
+
+  double get heightBodyWithNav =>
+      height - topPadding - bottomPadding - appBarH - 65;
 }
 
 extension WidgetModifier on Widget {

@@ -1,5 +1,3 @@
-import 'package:e_commerce_app_task/features/carts/presentation/cubit/carts_cubit.dart';
-import 'package:e_commerce_app_task/features/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +7,8 @@ import '../core/routes/magic_router.dart';
 import '../core/routes/routes_manager.dart';
 import '../core/routes/routes_name.dart';
 import '../core/service/locale_service/manager/locale_cubit.dart';
+import '../features/carts/presentation/cubit/carts_cubit.dart';
+import '../features/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'injection_container.dart';
 
 class MyApp extends StatefulWidget {
@@ -45,7 +45,6 @@ class _MyAppState extends State<MyApp> {
         builder: (context, state) => MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-
           //Themes
           theme: getApplicationTheme(),
           // darkTheme: appThemeDark(), // darkTheme

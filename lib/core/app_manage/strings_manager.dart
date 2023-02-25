@@ -22,7 +22,6 @@ class AppStrings {
   static const youHaveAnAccount = "you_have_an_account";
   static const passwordDoesNotMatch = "Password_does_not_match";
   static const invalidEmailFormat = "Invalid_Email_Format";
-
   static const home = "Home";
   static const category = "Category";
   static const carts = "carts";
@@ -30,7 +29,7 @@ class AppStrings {
   static const profile = "Profile";
   static const categoriesAppBar = "Categories";
   static const mostRecent = "most_recent";
-  static const mostPopular= "most_popular";
+  static const mostPopular = "most_popular";
   static const viewAll = "view_all";
   static const hintSearchText = "What_are_you_searching_for";
   static const egp = "egp";
@@ -39,7 +38,8 @@ class AppStrings {
   static const description = "description";
   static const addToCart = "Add_to_cart";
   static const transferToCart = "Transfer_to_cart";
-  static const itemRemovedWishlistSuccessfully = "item_removed_wishlist_successfully";
+  static const itemRemovedWishlistSuccessfully =
+      "item_removed_wishlist_successfully";
   static const total = "Total";
   static const item = "item";
   static const taxes = "taxes";
@@ -56,6 +56,7 @@ class AppStrings {
   static const somethingWentWrong = "something_went_wrong";
   static const tryAgain = "try_again";
   static const reloadScreen = "reload_screen";
-  static const verificationCompletedSuccessfully = "Verification_completed_successfully";
-
+  static const verificationCompletedSuccessfully =
+      "Verification_completed_successfully";
+  static const movedToCart = "Moved_to_cart";
 }

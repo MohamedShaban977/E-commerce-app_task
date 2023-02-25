@@ -1,14 +1,15 @@
-import 'package:e_commerce_app_task/core/app_manage/color_manager.dart';
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../core/app_manage/color_manager.dart';
 import 'argon_button.dart';
 
 class CustomButtonWithLoading extends StatelessWidget {
   final double? height;
   final double? width;
   final String text;
-  final double borderRadius ;
+  final double borderRadius;
+
   final Future Function() onTap;
 
   final Color? color, textColors;
@@ -21,8 +22,7 @@ class CustomButtonWithLoading extends StatelessWidget {
       this.width,
       this.color,
       this.textColors,
-        this.borderRadius = 4.0
-      })
+      this.borderRadius = 4.0})
       : super(key: key);
 
   @override
@@ -51,13 +51,11 @@ class CustomButtonWithLoading extends StatelessWidget {
           ),
         ),
       ),
-      borderRadius: borderRadius ,
+      borderRadius: borderRadius,
       color: color ?? ColorManager.primary,
       child: Text(
         text,
-        style: context.labelLarge.copyWith(
-          color: textColors ?? Colors.white
-        ),
+        style: context.labelLarge.copyWith(color: textColors ?? Colors.white),
         textAlign: TextAlign.center,
       ),
     );

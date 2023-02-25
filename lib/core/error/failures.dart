@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 abstract class Failure extends Equatable {
   final String? error;
 
@@ -12,17 +11,14 @@ abstract class Failure extends Equatable {
 
 class ServerFailure extends Failure {
   const ServerFailure([String? error]) : super(error);
-
 }
 
 class CacheFailure extends Failure {
   const CacheFailure([String? error]) : super(error);
-
 }
 
 class HandleFailure {
-
- static String mapFailureToMsg(Failure failure) {
+  static String mapFailureToMsg(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
         return failure.error!;

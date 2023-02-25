@@ -1,11 +1,10 @@
-
-
-import 'package:e_commerce_app_task/core/app_manage/color_manager.dart';
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
-import 'package:e_commerce_app_task/core/app_manage/strings_manager.dart';
-import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
 import 'package:flutter/material.dart';
+
+import '../core/app_manage/color_manager.dart';
+import '../core/app_manage/strings_manager.dart';
+import '../core/app_manage/values_manager.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final VoidCallback? onPress;
@@ -38,7 +37,7 @@ class CustomErrorWidget extends StatelessWidget {
           '$error',
           style: context.titleLarge,
         ),
-         Text(
+        Text(
           AppStrings.tryAgain.tr(),
           style: const TextStyle(
             fontSize: 18,
@@ -56,10 +55,10 @@ class CustomErrorWidget extends StatelessWidget {
                 elevation: 5.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50))),
-            child:  Text(
+            child: Text(
               AppStrings.reloadScreen.tr(),
               style: const TextStyle(
-                  color:ColorManager.white,
+                  color: ColorManager.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w700),
             ),

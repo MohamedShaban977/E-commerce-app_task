@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
-
-
 class ToastAndSnackBar {
-
   static toastError({required String message}) {
     return Fluttertoast.showToast(
       msg: message,
@@ -28,7 +24,6 @@ class ToastAndSnackBar {
     );
   }
 
-
   static showSnackBarError(BuildContext context, {required String message}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -50,5 +45,4 @@ class ToastAndSnackBar {
       ),
     );
   }
-
 }
