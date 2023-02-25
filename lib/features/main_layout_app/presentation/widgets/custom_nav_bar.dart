@@ -39,83 +39,102 @@ class _CustomNavBarState extends State<CustomNavBar> {
               }
               return showExitPopup(context);
             },
-            child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                body: PageStorage(
-                  bucket: bucket,
-                  child: cubit.currentScreen,
-                ),
-
-                ///  Center  Tab bar icons
-                floatingActionButton: buildFloatingActionButton(context),
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
-                bottomNavigationBar: SizedBox(
-                  width: double.infinity,
-                  child: BottomAppBar(
-                    shape: const CircularNotchedRectangle(),
-                    notchMargin: 8.0,
-                    child: SizedBox(
-                      height: 60,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          ///lift  Tab bar icons
-                          SizedBox(
-                            width: context.width * 0.4,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                ///home
-                                buildMaterialButton(
-                                  context,
-                                  index: 0,
-                                  icon: Icons.home,
-                                  text: AppStrings.home.tr(),
-                                ),
-
-                                ///category
-                                buildMaterialButton(
-                                  context,
-                                  index: 1,
-                                  icon: Icons.category,
-                                  text: AppStrings.category.tr(),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          /// Right Tab bar icons
-                          SizedBox(
-                            width: context.width * 0.4,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                /// wishlist
-                                buildMaterialButton(
-                                  context,
-                                  index: 3,
-                                  icon: Icons.favorite,
-                                  text: AppStrings.wishlist.tr(),
-                                ),
-
-                                /// profile
-                                buildMaterialButton(
-                                  context,
-                                  index: 4,
-                                  icon: Icons.person,
-                                  text: AppStrings.profile.tr(),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+            child: BlocBuilder<CartsCubit, CartsState>(
+              builder: (context, state) {
+                return Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: PageStorage(
+                      bucket: bucket,
+                      child: cubit.currentScreen,
                     ),
-                  ),
-                )),
+
+                    ///  Center  Tab bar icons
+                    floatingActionButton:
+                        sl<CartsCubit>().get(context).productsCart.isNotEmpty
+                            ? buildFloatingActionButton(context)
+                            : null,
+                    floatingActionButtonLocation:
+                        FloatingActionButtonLocation.centerDocked,
+                    bottomNavigationBar: SizedBox(
+                      width: double.infinity,
+                      child: BottomAppBar(
+                        shape: const CircularNotchedRectangle(),
+                        notchMargin: 8.0,
+                        child: SizedBox(
+                          height: 60,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              ///lift  Tab bar icons
+                              SizedBox(
+                                width: sl<CartsCubit>()
+                                        .get(context)
+                                        .productsCart
+                                        .isEmpty
+                                    ? context.width * 0.5
+                                    : context.width * 0.4,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    ///home
+                                    buildMaterialButton(
+                                      context,
+                                      index: 0,
+                                      icon: Icons.home,
+                                      text: AppStrings.home.tr(),
+                                    ),
+
+                                    ///category
+                                    buildMaterialButton(
+                                      context,
+                                      index: 1,
+                                      icon: Icons.category,
+                                      text: AppStrings.category.tr(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              /// Right Tab bar icons
+                              SizedBox(
+                                width: sl<CartsCubit>()
+                                        .get(context)
+                                        .productsCart
+                                        .isEmpty
+                                    ? context.width * 0.5
+                                    : context.width * 0.4,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    /// wishlist
+                                    buildMaterialButton(
+                                      context,
+                                      index: 3,
+                                      icon: Icons.favorite,
+                                      text: AppStrings.wishlist.tr(),
+                                    ),
+
+                                    /// profile
+                                    buildMaterialButton(
+                                      context,
+                                      index: 4,
+                                      icon: Icons.person,
+                                      text: AppStrings.profile.tr(),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ));
+              },
+            ),
           );
         },
       ),
@@ -196,13 +215,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              BlocBuilder<CartsCubit, CartsState>(
-                builder: (context, state) {
-                  return Text(sl<CartsCubit>().productsCart.length.toString(),
-                      style:
-                          context.labelLarge.copyWith(fontSize: FontSize.s14));
-                },
-              ),
+              Text(sl<CartsCubit>().totalQuantity().toString(),
+                  style: context.labelLarge.copyWith(fontSize: FontSize.s14)),
               const Icon(Icons.shopping_cart)
             ],
           ),

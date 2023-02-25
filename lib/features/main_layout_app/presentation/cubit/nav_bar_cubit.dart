@@ -36,7 +36,7 @@ class NavBarCubit extends Cubit<NavBarState> {
   // }
 
   int currentTab = 0; // to keep track of active tab index
-   Widget currentScreen = screens().first; // Our first view in viewport
+  Widget currentScreen = screens().first; // Our first view in viewport
   // String titleAppbar = 'Home';
 
   void changeIndex(int index) {
@@ -48,7 +48,6 @@ class NavBarCubit extends Cubit<NavBarState> {
 
   Color inactiveColor = ColorManager.nonSelectNavBar;
   Color inactiveColorText = ColorManager.textGray;
-
 
   Color changeColorIcon(int index, {Color activeColor = ColorManager.primary}) {
     return currentTab == index ? activeColor : inactiveColor;
