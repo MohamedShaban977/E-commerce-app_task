@@ -1,5 +1,6 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
+import 'package:e_commerce_app_task/core/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/app_manage/strings_manager.dart';
@@ -13,7 +14,7 @@ class ViewTotalCountPrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 160.0,
+      width: Responsive.isMobileS(context) ? 120 : 160.0,
       height: 45.0,
       child: Card(
         elevation: 0.0,

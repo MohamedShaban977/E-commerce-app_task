@@ -1,4 +1,5 @@
 import 'package:e_commerce_app_task/core/app_manage/color_manager.dart';
+import 'package:e_commerce_app_task/core/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonWidget extends StatelessWidget {
@@ -32,10 +33,15 @@ class CustomButtonWidget extends StatelessWidget {
               color: colorIcon,
             ),
             const SizedBox(width: 11.0),
-            Text(text,
-                style: style?.copyWith(
-                  color: colorText,
-                )),
+            Expanded(
+              flex: Responsive.isMobileS(context) ? 1 : 0,
+              child: Text(text,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: style?.copyWith(
+                    color: colorText,
+                  )),
+            ),
           ],
         ),
       ),

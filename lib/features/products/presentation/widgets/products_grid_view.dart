@@ -18,7 +18,7 @@ class ProductsGridView extends StatelessWidget {
           : Responsive.isTablet(context)
               ? 3
               : 4,
-      childAspectRatio: 0.8,
+      childAspectRatio: Responsive.isMobileS(context) ? 0.75 : 0.8,
       children: List.generate(
           products.length,
           (index) => ViewCardProductWidget(

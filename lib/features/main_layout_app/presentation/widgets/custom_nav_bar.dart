@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/injection_container.dart';
+import '../../../../core/responsive/responsive.dart';
 import '../../../carts/presentation/cubit/carts_cubit.dart';
 import '../cubit/nav_bar_cubit.dart';
 
@@ -27,8 +28,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NavBarCubit(),
-      child: BlocConsumer<NavBarCubit, NavBarState>(
-        listener: (context, states) {},
+      child: BlocBuilder<NavBarCubit, NavBarState>(
         builder: (context, states) {
           cubit = NavBarCubit.get(context);
           return WillPopScope(
@@ -59,7 +59,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                       width: double.infinity,
                       child: BottomAppBar(
                         shape: const CircularNotchedRectangle(),
-                        notchMargin: 8.0,
+                        notchMargin: Responsive.isMobileS(context) ? 5.0 : 8.0,
                         child: SizedBox(
                           height: 60,
                           child: Row(
@@ -175,6 +175,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
       {required IconData? icon, required int index, required String text}) {
     return MaterialButton(
       minWidth: 40,
+      padding: Responsive.isMobileS(context) ? EdgeInsets.zero : null,
       onPressed: () => cubit.changeIndex(index),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -198,8 +199,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
   Container buildFloatingActionButton(BuildContext context) {
     return Container(
-      width: 70.0,
-      height: 70.0,
+      width: Responsive.isMobileS(context) ? 60.0 : 70.0,
+      height: Responsive.isMobileS(context) ? 60.0 : 70.0,
       decoration: BoxDecoration(
           border: Border.all(
             width: cubit.currentTab != 2 ? 0.0 : 3.0,

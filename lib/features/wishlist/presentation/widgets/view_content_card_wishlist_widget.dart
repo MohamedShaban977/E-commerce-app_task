@@ -1,6 +1,7 @@
 import 'package:e_commerce_app_task/core/app_manage/extension_manager.dart';
 import 'package:e_commerce_app_task/core/app_manage/values_manager.dart';
 import 'package:e_commerce_app_task/core/locale/app_localizations.dart';
+import 'package:e_commerce_app_task/core/responsive/responsive.dart';
 import 'package:e_commerce_app_task/widgets/toast_and_snackbar.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class ContentCardWishlistViewWidget extends StatelessWidget {
       children: [
         CustomViewImageNetwork(
           image: product.imageLink,
-          height: 250.0,
+          height: Responsive.isMobileS(context) ? 150 : 250.0,
           width: context.width,
         ),
         Padding(

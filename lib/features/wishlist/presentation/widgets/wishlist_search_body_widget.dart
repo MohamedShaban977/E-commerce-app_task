@@ -16,10 +16,7 @@ class WishlistSearchBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p18),
-        child: GridViewInWishlistView(products: allResult),
-      ),
+      child: GridViewInWishlistView(products: allResult),
     );
   }
 }
